@@ -1,0 +1,26 @@
+[project]
+name = "evoc2rust"
+version = "0.0.1"
+description = ""
+authors = [
+]
+dependencies = [
+    "tree-sitter==0.22.3",
+    "tree-sitter-c==0.21.4",
+    "openai>=1.65.4",
+    "pebble>=5.1.0",
+    "httpx>=0.28.1",
+    "tqdm>=4.67.1",
+    "requests==2.32.3",
+    "matplotlib",
+    "seaborn",
+    "numpy",
+]
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=76.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pdm]

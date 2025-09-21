@@ -1,0 +1,15 @@
+[package]
+name = "my_proj"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name         = "my_proj"
+
+[profile.dev]
+overflow-checks = false
+opt-level = 3
+
+[lints.rust]
+overflowing_literals = "allow"
+arithmetic_overflow = "allow"

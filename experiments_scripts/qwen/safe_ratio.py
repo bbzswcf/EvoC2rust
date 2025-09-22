@@ -1,6 +1,6 @@
 from config.global_config import GlobalConfig
 from metadata_extraction.rust_metadata import c_metadata_to_rust_metadata
-from llm.client_hw import GenerationClient
+from llm.client_qwen import GenerationClient
 from cache.cache import ProjectCache
 from code_optim.code_gen import code_generation, code_verification
 from entity.project import RustProject

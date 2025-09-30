@@ -24,7 +24,11 @@ An automated framework for converting complete C projects to equivalent Rust one
 
 ## Introduction
 
-In this paper, we propose \ourmethod, an automated framework for converting complete C projects to equivalent Rust ones. \ourmethod employs a skeleton-guided translation strategy for project-level translation. The pipeline consists of three stages: 1) it first decomposes the C project into functional modules, employs a feature-mapping-enhanced LLM to transform definitions and macros, and generates type-checked function stubs, which form a compilable Rust skeleton; 2) it then incrementally translates functions, replacing the corresponding stub placeholders; 3) finally, it repairs compilation errors by integrating LLM and static analysis.
+EvoC2Rust is an automated framework designed to convert complete C projects to equivalent Rust ones. It employs a skeleton-guided translation strategy for project-level translation. The pipeline consists of three stages:
+  - It first decomposes the C project into functional modules, employs a feature-mapping-enhanced LLM to transform definitions and macros, and generates type-checked function stubs, which form a compilable Rust skeleton.
+  - It then incrementally translates functions, replacing the corresponding stub placeholders.
+  - Finally, it repairs compilation errors by integrating LLM and static analysis.
+
 
 <div align="center">
     <img src="figures/overview.jpg" alt="EvoC2Rust Overview" width="800"/>

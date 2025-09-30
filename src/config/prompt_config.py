@@ -1421,45 +1421,6 @@ macro_rules! MY_CALL_FUNC_WITH_CHAR { () => { My_calledFunc(b'a' as u8) } }
 ```
 """
 
-definition_prompt_blank = """\
-Translate the C Code to Rust. 
-You need to translate the definition only.
-Notice that: 
-Remember when translating macros, add `pub(crate)` to the macro definition to make it visible.
-"""
-
-dummy_function_prompt_blank = """\
-Translate the C Code to Rust. 
-You need to translate the function to a dummy function with unimplemented!() macro only.
-Here are some rules you need to follow:
-Basic types like int, char, unsigned char, uint32_t, etc. should be translated to Rust types: int -> i32, char -> u8, unsigned char -> u8, uint32_t -> u32, etc. 
-"""
-
-function_prompt_blank = """\
-Translate the C Code to Rust. 
-You need to translate the function only.
-Here are some rules you need to follow:
-Basic types like int, char, unsigned char, uint32_t, etc. should be translated to Rust types: int -> i32, char -> u8, unsigned char -> u8, uint32_t -> u32, etc. 
-"""
-
-macro_function_prompt_blank = """\
-Translate the C Code to Rust. 
-You need to translate the macro only.
-Notice that: 
-Remember when translating macros, add `pub(crate)` to the macro definition to make it visible.
-When using another macros in C, you should use macros in Rust with the same name. For example, `#define MY_MACRO ANOTHER_MACRO(ANOTHER_MACRO2)` should be translated to `macro_rules! MY_MACRO { () => { ANOTHER_MACRO!(ANOTHER_MACRO2!()) } }\n pub(crate) use MY_MACRO;`. Notice that C original macros, like __FILE__ and __LINE__, should also be translated to __FILE__!() and __LINE__!() in Rust.
-If macros are used as comparision like 'if (MY_MACRO < a)', you should ensure the macro is placed at right side. For example, `if (MY_MACRO < a)` should be translated to `if a > MY_MACRO!()`.
-"""
-
-macro_prompt_blank = """\
-Translate the C Code to Rust. 
-You need to translate the macro only.
-Notice that: 
-Remember when translating macros, add `pub(crate)` to the macro definition to make it visible.
-"""
-
-
-
 delim_repair_prompt = """\
 Fix the compiler bugs in the following Rust code with provided compiler error messagesm, possibly because of mismatched parens.
 Only fix lines that have unmatched parens bugs, don't modify any other code.

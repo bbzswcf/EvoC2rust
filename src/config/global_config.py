@@ -3,14 +3,17 @@ import os
 
 from config.prompt_config import *
 
-# def read_config():
-#     config = configparser.ConfigParser()
-#     config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
-#     return config
+def read_config():
+    config = configparser.ConfigParser()
+    # Ensure the path is correct relative to this file
+    config_path = os.path.join(os.path.dirname(__file__), 'llm_config.ini')
+    if os.path.exists(config_path):
+        config.read(config_path)
+    return config
 
 class GlobalConfig:
     def __init__(self):
-        # config = read_config()
+        config = read_config()
         self.project_name = None
         self.project_dir = "./data/default/project"
         self.created_project_dir = "./.tmp/created_project"
@@ -65,15 +68,10 @@ class GlobalConfig:
         self.function_prompt = function_prompt
         self.delim_repair_prompt = delim_repair_prompt
         self.repair_prompt = repair_prompt
-        # self.definition_prompt = definition_prompt_blank
-        # self.macro_prompt = macro_prompt_blank
-        # self.macro_function_prompt = macro_function_prompt_blank
-        # self.dummy_function_prompt = dummy_function_prompt_blank
-        # self.function_prompt = function_prompt_blank
 
-        self.api_key = "xxx"
-        self.base_url = "https://api.deepseek.com/beta"
-        self.model_name = "deepseek-coder"
+        self.api_key = config.get('llm', 'api_key')
+        self.base_url = config.get('llm', 'base_url')
+        self.model_name = config.get('llm', 'model_name')
 
         self.cache_dir = "./data/default/cache"
         self.final_project_dir = "./final_project"

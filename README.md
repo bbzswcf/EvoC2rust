@@ -4,23 +4,33 @@
 
 </div>
 
-An automated framework for converting complete C projects to equivalent Rust ones. For paper "EvoC2Rust: A Skeleton-guided Framework for Project-Level C-to-Rust Translation".
+An automated framework for converting complete C projects to equivalent Rust ones.
 
-## Table of Contents
+## Project Directory Structure
 
-- [EvoC2Rust: A Skeleton-guided Framework for Project-Level C-to-Rust Translation](#evoc2rust-a-skeleton-guided-framework-for-project-level-c-to-rust-translation)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Usage](#usage)
-    - [1. Metadata Extraction](#1-metadata-extraction)
-    - [2. Translation](#2-translation)
-    - [3. Repair](#3-repair)
-    - [4. Verification](#4-verification)
-    - [5. Project Generation](#5-project-generation)
-  - [Case Studies](#case-studies)
+```
+.
+├── data/                                   # Main data folder
+│   ├── default/                            # Default data directory for script execution
+│   │   ├── project/                        # Place projects to be translated here
+│   │   ├── cache/                          # Caches for generated results
+│   │   ├── c-metadata/                     # Stores parsed C metadata
+│   │   └── rust-metadata/                  # Stores parsed Rust metadata
+│   ├── increment/                          # data directory for incremental compilation
+│   ├── fill/                               # data directory for fill-in-the-blank tests
+│   └── project_template/                   # Sample project templates
+│       ├── safelevel-0/                    # General project framework
+│       └── safelevel-test/                 # Framework with unit tests
+├── scripts/                                # Scripts for running the translation pipeline
+├── experiment_scripts/                     # Scripts for reproducing experiments
+├── src/                                    # Main source code directory
+│   ├── config/                             # Global settings and prompt configurations
+│   ├── cache/                              # Code cache management module
+│   ├── code_optim/                         # Error repair and optimization module
+│   ├── entity/                             # Core data structures and project management
+│   ├── llm/                                # LLM API interaction module
+│   └── metadata_extraction/                # C/Rust metadata extraction using tree-sitter
+```
 
 ## Introduction
 
@@ -150,3 +160,36 @@ The `case` directory contains detailed examples of how EvoC2Rust handles specifi
 
 - **[Red-Black Tree Rotation](case/case_study.md)**: We present a case study on the `rb_tree_rotate` function, a core operation in a red-black tree implementation, to illustrate the effectiveness of EvoC2Rust.
 - **[Post-Generation Repair](case/post-generation_repair_case.md)**: We list an example of the full repair pipeline, showing how bracket repair, rule-based repair, and LLM refinement work together to fix a series of compilation errors.
+
+## Results
+
+### RQ1: How effectively does our method translate complete C projects to equivalent safe Rust code?
+
+<div align="center">
+    <img src="figures/rq1.jpg" alt="rq1 result" width="800"/>
+</div>
+Answer to RQ1: EvoC2Rust surpasses all baseline methods in project-level C-to-Rust translation, demonstrating the highest overall performance across compilation success, line acceptance, and code safety on both open-source and industrial benchmarks.
+
+### RQ2: What is the module conversion accuracy achieved by our method?
+
+<div align="center">
+    <img src="figures/rq2.jpg" alt="rq2 result" width="800"/>
+</div>
+Answer to RQ2: Each component in EvoC2Rust plays a crucial role in its overall performance. The feature mapping mechanism provides a safe and reliable basis by bridging C-to-Rust semantic gaps, while the cascading repair chain fixes remaining errors to maximize syntactic and semantic correctness.
+
+### RQ3: To what extent do key components contribute to the overall performance of our method?
+
+<div align="center">
+    <img src="figures/rq3.jpg" alt="rq3 result" width="800"/>
+</div>
+Answer to RQ3: Each component in EvoC2Rust plays a crucial role in its overall performance. The feature mapping mechanism provides a safe and reliable basis by bridging C-to-Rust semantic gaps, while the cascading repair chain fixes remaining errors to maximize syntactic and semantic correctness.
+
+### RQ4: How does our method scale to large projects in terms of accuracy, safety, and efficiency?
+
+<div align="center">
+    <img src="figures/rq4_1.jpg" alt="rq4_1 result" width="800"/>
+</div>
+<div align="center">
+    <img src="figures/rq4_2.jpg" alt="rq4_2 result" width="800"/>
+</div>
+Answer to RQ4: Our method exhibits strong scalability on large-scale projects, maintaining resilient compilation rates, high safety guarantees, and stable efficiency without performance collapse.
